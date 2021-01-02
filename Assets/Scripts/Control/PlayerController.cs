@@ -28,7 +28,8 @@ namespace RPG.Control
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
 
                 // if hit target has not CombatTarget component, continue...
-                if (target == null) continue;
+                // if (target == null) continue;
+                if (!GetComponent<Fighter>().CanAttack(target)) continue;
 
                 // else call Attack() on click
                 if (Input.GetMouseButton(0)) {
