@@ -17,7 +17,6 @@ namespace RPG.Combat
         {
             // if damage > health => set 0
             healthPoints = Mathf.Max(healthPoints - damage, 0);
-            print(healthPoints);
 
             if (healthPoints == 0) {
                 Die();

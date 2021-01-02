@@ -13,9 +13,6 @@ namespace RPG.Control
 
             // if interacted with movement
             if(InteractWithMovement()) return;
-
-            print("Nothing to do :(");
-            
         }
 
         private bool InteractWithCombat()
@@ -27,11 +24,9 @@ namespace RPG.Control
                 // try to get component CombatTarget from hit target
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
 
-                // if hit target has not CombatTarget component, continue...
-                // if (target == null) continue;
                 if (!GetComponent<Fighter>().CanAttack(target)) continue;
 
-                // else call Attack() on click
+                // call Attack() on click
                 if (Input.GetMouseButton(0)) {
                     GetComponent<Fighter>().Attack(target);
                 }
