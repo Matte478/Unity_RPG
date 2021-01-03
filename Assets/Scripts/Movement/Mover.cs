@@ -10,15 +10,20 @@ namespace RPG.Movement
     {
         [SerializeField] Transform target;
         NavMeshAgent navMeshAgent;
+        Health health;
 
         void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
         }
 
         // Update is called once per frame
         void Update()
         {   
+            // disable navMashAgent when character is dead
+            navMeshAgent.enabled = !health.IsDead();
+
             UpdateAnimator();
         }
 
