@@ -1,3 +1,4 @@
+using System;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -8,13 +9,25 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour 
     {
         Health health;
+        Spawner spawner;
         
          void Start() {
             health = GetComponent<Health>();
+            spawner = GetComponent<Spawner>();
         }
         void Update()
         {
-            if(health.IsDead()) return;
+            if(health.IsDead()) {
+                if(Input.GetKeyDown(KeyCode.R)) {
+                    // respawn at last checkpoint
+                    spawner.RespawnAtCheckpoint();
+                } else if(Input.GetKeyDown(KeyCode.T)) {
+                    // respawn at level start
+                    spawner.RespawnAtInit();
+                }
+
+                return;
+            }
 
             // if interacted with CombatTarget
             if(InteractWithCombat()) return;

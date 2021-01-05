@@ -32,5 +32,15 @@ namespace RPG.Core
             isDead = true;
         }
 
+        public void Reborn()
+        {
+            if (!isDead) return;
+
+            GetComponent<Animator>().SetTrigger("reborn");
+
+            healthPoints = 100f;
+            isDead = false;
+        }
+
     }
 }
