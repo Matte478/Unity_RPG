@@ -9,6 +9,7 @@ namespace RPG.Core
         Quaternion initRotation;
         Vector3 checkpointPosition;
         Quaternion checkpointRotation;
+        Health[] characters;
 
         void Start()
         {
@@ -18,6 +19,8 @@ namespace RPG.Core
             // first checkpoint is level init position
             checkpointPosition = transform.position;
             checkpointRotation = transform.rotation;
+
+            characters = FindObjectsOfType(typeof(Health)) as Health[];
         }
 
         public void RespawnAtInit()
@@ -36,10 +39,19 @@ namespace RPG.Core
 
         private void Respawn(Vector3 position, Quaternion rotation)
         {
-            GetComponent<Health>().Reborn();
+            // GetComponent<Health>().Reborn();
 
+            // move and rotate character
             GetComponent<NavMeshAgent>().Warp(position);
             transform.rotation = rotation;
+
+            // reborn all characters (enemies + player) or refill their health
+            foreach(Health character in characters) {
+                if(character.IsDead())
+                    character.Reborn();
+                else
+                    character.FillHealth();
+            }
         }
 
         private void OnTriggerEnter(Collider other) {

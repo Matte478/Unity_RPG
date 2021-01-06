@@ -11,7 +11,8 @@ namespace RPG.Control
         Health health;
         Spawner spawner;
         
-         void Start() {
+         void Start()
+         {
             health = GetComponent<Health>();
             spawner = GetComponent<Spawner>();
         }
