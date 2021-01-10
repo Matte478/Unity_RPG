@@ -2,6 +2,7 @@ using System;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using RPG.UI;
 using UnityEngine;
 
 namespace RPG.Control
@@ -10,14 +11,19 @@ namespace RPG.Control
     {
         Health health;
         Spawner spawner;
+        Menu menu;
         
-         void Start()
-         {
+        void Start()
+        {
             health = GetComponent<Health>();
             spawner = GetComponent<Spawner>();
+            menu = FindObjectOfType<Menu>();
         }
+
         void Update()
         {
+            if(menu.IsPaused()) return;
+            
             if(health.IsDead()) {
                 if(Input.GetKeyDown(KeyCode.R)) {
                     // respawn at last checkpoint
