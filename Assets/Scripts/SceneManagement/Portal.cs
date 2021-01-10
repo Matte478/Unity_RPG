@@ -30,7 +30,12 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
-            // keep menu game object
+            if (sceneToLoad == -1) {
+                Debug.LogError("Scene to load not set");
+                yield break;
+            }
+
+            // keep portal game object
             DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
