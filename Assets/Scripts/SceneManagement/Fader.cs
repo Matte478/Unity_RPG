@@ -29,7 +29,6 @@ namespace RPG.SceneManagement
 
         public IEnumerator FadeIn(float time)
         {
-
              while (canvasGroup.alpha > 0) {
                 canvasGroup.alpha -= Time.deltaTime / time;
                 yield return null;

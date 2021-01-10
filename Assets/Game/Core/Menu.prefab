@@ -62,7 +62,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -155,6 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec49d634bd364d6189187dda716ce5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeOutTime: 0.5
+  fadeIntTime: 0.5
+  fadeWaitTime: 0.3
+  menuTitle: {fileID: 8547518429711174099}
+  playButtonText: {fileID: 8547518430341872254}
 --- !u!225 &8547518429434139537
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -163,7 +168,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8547518429434139529}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -201,8 +206,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 102.68}
-  m_SizeDelta: {x: -965.6655, y: -488.86688}
+  m_AnchoredPosition: {x: 0.0025024414, y: 75}
+  m_SizeDelta: {x: -721.0209, y: -488.86688}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8547518429711174098
 CanvasRenderer:
@@ -245,7 +250,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PAUSED
+  m_Text: SIMPLE RPG GAME
 --- !u!1 &8547518429897464980
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +264,7 @@ GameObject:
   - component: {fileID: 8547518429897464977}
   - component: {fileID: 8547518429897464982}
   m_Layer: 5
-  m_Name: Resume button
+  m_Name: Play button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,7 +373,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8547518429434139542}
         m_TargetAssemblyTypeName: RPG.UI.Menu, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -588,7 +593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESUME
+  m_Text: PLAY
 --- !u!1 &8547518430951498073
 GameObject:
   m_ObjectHideFlags: 0
