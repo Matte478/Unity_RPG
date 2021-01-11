@@ -9,8 +9,14 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] float timeBetweenAttacks = 1f;
-        Health target;
-        float timeSinceLastAttack = Mathf.Infinity;
+        private Health target;
+        private AudioSource[] sounds;
+        private float timeSinceLastAttack = Mathf.Infinity;
+
+        void Start()
+        {
+            sounds = GetComponents<AudioSource>();
+        }
 
         void Update()
         {
@@ -50,6 +56,7 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("stopAttack");
 
+            PlayHitSound();
             // this will trigger hit() event
             GetComponent<Animator>().SetTrigger("attack");
         }
@@ -57,8 +64,11 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            if (target == null) return;
-            
+            if (target == null) {
+                StopHitSound();
+                return;
+            }
+
             target.TakeDamage(weaponDamage);
         }
 
@@ -91,6 +101,16 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");
+        }
+
+        private void PlayHitSound()
+        {
+            sounds[0].Play();
+        }
+
+        private void StopHitSound()
+        {
+            sounds[0].Stop();
         }
     }
 }

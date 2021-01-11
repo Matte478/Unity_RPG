@@ -634,6 +634,7 @@ MonoBehaviour:
   fadeIntTime: 0.5
   fadeWaitTime: 0.3
   menuTitle: {fileID: 0}
+  playButtonText: {fileID: 0}
 --- !u!1 &7612444018508606744
 GameObject:
   m_ObjectHideFlags: 0
