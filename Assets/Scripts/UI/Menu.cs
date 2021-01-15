@@ -21,10 +21,13 @@ namespace RPG.UI
 
         private bool inGame = false;
         private bool paused = false;
+        private bool finished = false;
         private String menuText = "SIMPLE RPG GAME";
         private String pauseText = "PAUSED";
+        private String finishText = "FINISHED";
         private String playButton = "PLAY";
         private String resumeButton = "RESUME";
+        private String finishButton = "NEW GAME";
         
         void Start()
         {
@@ -52,28 +55,61 @@ namespace RPG.UI
             return paused;
         }
 
+        public bool IsFinished()
+        {
+            return finished;
+        }
+
+        public void FinishGame()
+        {
+            // stop game
+            Time.timeScale = 0;
+            
+            inGame = false;
+            finished = true;
+            
+            menuTitle.text = finishText;
+            playButtonText.text = finishButton;
+            
+            ShowMenu();
+        }
+
         public void Play()
         {
-            if(!inGame) {
-                // if player is not in the game, then load the first level
+            print("play");
+            print(inGame);
+            if(!inGame || finished) {
+                // if player is not in the game (or game is finished), then load the first level
                 StartCoroutine(LoadGame());
-            } else {
+            } else if(paused) {
                 Resume();
             }
+        }
+
+        public void ShowMenu()
+        {
+            GetComponent<CanvasGroup>().alpha = 1;
+        }
+
+        public void HideMenu()
+        {
+            GetComponent<CanvasGroup>().alpha = 0;
         }
 
         public void Pause()
         {
             paused = true;
+            // stop game
             Time.timeScale = 0;
-            GetComponent<CanvasGroup>().alpha = 1;
+            ShowMenu();
         }
 
         public void Resume()
         {
             paused = false;
+            // resume game
             Time.timeScale = 1;
-            GetComponent<CanvasGroup>().alpha = 0;
+            HideMenu();
         }
 
         public void Exit()
@@ -85,8 +121,11 @@ namespace RPG.UI
         {
             int sceneToLoad = 1;
 
+            print(gameObject.name);
+
             // keep menu game object
-            DontDestroyOnLoad(gameObject);
+            // if(!finished)
+                DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
 
@@ -96,9 +135,10 @@ namespace RPG.UI
 
             // update menu
             inGame = true;
+            finished = false;
             menuTitle.text = pauseText;
             playButtonText.text = resumeButton;
-            GetComponent<CanvasGroup>().alpha = 0;
+            HideMenu();
 
             // wait little bit and then fade in the first level
             yield return new WaitForSeconds(fadeWaitTime);

@@ -22,7 +22,7 @@ namespace RPG.Control
 
         void Update()
         {
-            if(menu.IsPaused()) return;
+            if(menu.IsPaused() || menu.IsFinished()) return;
             
             if(health.IsDead()) {
                 if(Input.GetKeyDown(KeyCode.R)) {
@@ -86,6 +86,13 @@ namespace RPG.Control
             }
 
             return false;
+        }
+        
+        private void OnTriggerEnter(Collider other) {
+            if(other.CompareTag("Finish")) {
+                print("ewjiorjeiwjrioew");
+                menu.FinishGame();
+            }
         }
 
         private static Ray GetMouseRay()
