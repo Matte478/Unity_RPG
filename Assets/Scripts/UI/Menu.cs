@@ -76,8 +76,6 @@ namespace RPG.UI
 
         public void Play()
         {
-            print("play");
-            print(inGame);
             if(!inGame || finished) {
                 // if player is not in the game (or game is finished), then load the first level
                 StartCoroutine(LoadGame());
@@ -121,11 +119,11 @@ namespace RPG.UI
         {
             int sceneToLoad = 1;
 
-            print(gameObject.name);
+            // resume game, needed for fader and after for new scene
+            Time.timeScale = 1;
 
             // keep menu game object
-            // if(!finished)
-                DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
 
